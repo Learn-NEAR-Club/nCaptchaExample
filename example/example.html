@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form {
+            width: 50%;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://ncaptcha.xyz/n-captcha/n-captcha@stable.js"></script>
+</head>
+<body>
+<form method="GET" name="" action="" id="example-form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="4"></textarea>
+    <div id="nCaptcha-verification" data-account="owner.near" data-price="0.02"></div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        //Method to init nCaptcha for element with id nCaptcha-verification
+        window.initNCaptcha();
+
+        // Get the form element
+        const form = document.getElementById('example-form');
+        // Add event listener for form submission
+        form.addEventListener('submit', function (event) {
+            // Check if the nCaptcha is valid
+            if (!window?.nCaptchaWallet?.nCaptcha?.isValid) {
+                // Prevent the form from being submitted
+                event.preventDefault();
+                // Optionally, you can display an error message or perform other actions
+                alert('please verify form with nCaptcha');
+            }
+        });
+    });
+</script>
+</html>
